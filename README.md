@@ -45,11 +45,11 @@ cp .env.example .env
   - [x] Create initial documentation
 
 - [x] Core Development
-  - [ ] Implement configuration management
+  - [x] Implement configuration management
   - [x] Create chat logic with LangChain
   - [x] Build CLI interface using Typer
   - [x] Add Rich text formatting
-  - [ ] Implement conversation context handling
+  - [x] Implement conversation context handling
 
 - [ ] Testing
   - [ ] Write unit tests for chat functionality
