@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Run code quality checks before commit
+echo "Running pre-commit checks..."
+
+# Store the current staged files
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '.py$' || true)
+
+if [ -n "$FILES" ]; then
+    echo "Running checks on Python files..."
+    
+    # Run ruff format check
+    just format-check || {
+        echo "❌ Code formatting check failed. Run 'just format' to fix."
+        exit 1
+    }
+    
+    # Run ruff lint
+    just lint || {
+        echo "❌ Linting failed. Run 'just lint-fix' to attempt auto-fixes."
+        exit 1
+    }
+    
+    # Run type checking
+    just type-check || {
+        echo "❌ Type checking failed."
+        exit 1
+    }
+    
+    # Run tests
+    just test || {
+        echo "❌ Tests failed."
+        exit 1
+    }
+fi
+
+echo "✅ All checks passed!"
+exit 0
