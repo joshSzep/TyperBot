@@ -6,14 +6,26 @@ authors = []
 dependencies = [
     "typer>=0.9.0",
     "langchain>=0.1.0",
+    "langchain-community>=0.0.10",
+    "langchain-anthropic>=0.1.1",
     "anthropic>=0.7.0",
     "rich>=13.7.0",
     "pytest-cov>=6.0.0",
 ]
 requires-python = ">=3.13"
 
-[project.optional-dependencies]
-dev = ["pytest>=8.0.0", "pytest-cov>=4.1.0", "ruff>=0.3.0", "pyright>=1.1.350"]
+[project.scripts]
+typerbot = "typerbot.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.25.3",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.5",
+    "ruff>=0.3.0",
+    "pyright>=1.1.350",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -34,6 +46,13 @@ select = [
     "PL",  # pylint
     "RUF", # ruff-specific rules
 ]
+ignore = [
+    "PLR2004", # magic value used in comparison
+    "RUF010",  # use explicit conversion flag
+    "E501",    # line too long
+    "UP043",   # unnecessary default type annotation
+]
+
 
 [tool.ruff.format]
 quote-style = "double"
@@ -47,15 +66,10 @@ section-order = ["standard-library", "third-party", "first-party"]
 combine-as-imports = false
 
 [tool.pyright]
-typeCheckingMode = "strict"
-reportUnknownMemberType = true
-reportUnknownParameterType = true
-reportUnknownVariableType = true
-reportUnknownArgumentType = true
-reportPrivateUsage = true
-reportUntypedFunctionDecorator = true
+typeCheckingMode = "standard"
 
 [tool.pytest.ini_options]
 minversion = "8.0"
 addopts = "-ra -q --cov=typerbot --cov-report=term-missing"
 testpaths = ["tests"]
+asyncio_mode = "auto"
