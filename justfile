@@ -4,7 +4,7 @@ default:
 
 # Install all dependencies including development ones
 install:
-    uv pip install -e ".[dev]"
+    uv sync --all-extras --all-groups --all-packages
 
 # Run all code quality checks
 check: format lint type-check test
