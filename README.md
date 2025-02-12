@@ -38,17 +38,17 @@ cp .env.example .env
 
 ## Implementation Steps
 
-- [ ] Project Setup
-  - [ ] Initialize project structure
-  - [ ] Configure dependency management with uv
-  - [ ] Set up linting (ruff) and type checking (pyright)
-  - [ ] Create initial documentation
+- [x] Project Setup
+  - [x] Initialize project structure
+  - [x] Configure dependency management with uv
+  - [x] Set up linting (ruff) and type checking (pyright)
+  - [x] Create initial documentation
 
-- [ ] Core Development
+- [x] Core Development
   - [ ] Implement configuration management
-  - [ ] Create chat logic with LangChain
-  - [ ] Build CLI interface using Typer
-  - [ ] Add Rich text formatting
+  - [x] Create chat logic with LangChain
+  - [x] Build CLI interface using Typer
+  - [x] Add Rich text formatting
   - [ ] Implement conversation context handling
 
 - [ ] Testing
