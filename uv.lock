@@ -944,6 +944,7 @@ dependencies = [
     { name = "langchain-anthropic" },
     { name = "langchain-community" },
     { name = "pytest-cov" },
+    { name = "python-dotenv" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -964,6 +965,7 @@ requires-dist = [
     { name = "langchain-anthropic", specifier = ">=0.1.1" },
     { name = "langchain-community", specifier = ">=0.0.10" },
     { name = "pytest-cov", specifier = ">=6.0.0" },
+    { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "rich", specifier = ">=13.7.0" },
     { name = "typer", specifier = ">=0.9.0" },
 ]

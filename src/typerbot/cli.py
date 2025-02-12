@@ -2,9 +2,11 @@
 
 import asyncio
 import os
+from pathlib import Path
 from typing import Annotated
 
 import typer
+from dotenv import load_dotenv
 from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
@@ -38,12 +40,31 @@ def chat(
             help="Model to use for chat completion.",
         ),
     ] = "claude-3-opus-20240229",
+    env_file: Annotated[
+        Path | None,
+        typer.Option(
+            "--env-file",
+            "-e",
+            help="Path to .env file. If not provided, will try .env in current directory.",
+        ),
+    ] = None,
 ) -> None:
     """Start an interactive chat session with the bot."""
+    # Load environment variables from .env file
+    if env_file:
+        if not env_file.exists():
+            console.print(
+                f"[red]Error:[/red] Environment file {env_file} does not exist.",
+            )
+            raise typer.Exit(1)
+        load_dotenv(env_file)
+    else:
+        load_dotenv()  # Try to load .env from current directory
+
     api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         console.print(
-            "[red]Error:[/red] No API key provided. Either pass --api-key or set ANTHROPIC_API_KEY environment variable.",
+            "[red]Error:[/red] No API key provided. Either pass --api-key, set ANTHROPIC_API_KEY environment variable, or provide it in .env file.",
         )
         raise typer.Exit(1)
 
